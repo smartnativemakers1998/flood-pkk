@@ -40,7 +40,7 @@ void setup() {
 
 void loop() {
   // ===== IR Sensor Reading =====
-  int distance = random(2, 100); // cm (2cm - 100cm range)
+  int distance = random(2, 100);
 
   // ===== Sensor details kept in code =====
   String sensorDetails = "IR Sensor Distance: " + String(distance) + " cm";
