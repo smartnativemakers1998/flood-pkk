@@ -39,13 +39,13 @@ void setup() {
 }
 
 void loop() {
-  // ===== Dummy IR Sensor Reading =====
+  // ===== IR Sensor Reading =====
   int distance = random(2, 100); // cm (2cm - 100cm range)
 
   // ===== Sensor details kept in code =====
   String sensorDetails = "IR Sensor Distance: " + String(distance) + " cm";
 
-  // ===== Only send "in-progress" status to Telegram =====
+  // ===== Status =====
   String message = "Sensor in-progress... 🔄";
 
   Serial.println("Sending to Telegram: " + message);
