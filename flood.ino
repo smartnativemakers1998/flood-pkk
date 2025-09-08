@@ -35,7 +35,7 @@ void setup() {
     Serial.print(".");
   }
   Serial.println("\nWiFi connected!");
-  sendToTelegram("ESP Device is Online ✅ (Dummy Flood Detector with IR Sensor)");
+  sendToTelegram("ESP Device is Online ✅ (Flood Detector with IR Sensor)");
 }
 
 void loop() {
