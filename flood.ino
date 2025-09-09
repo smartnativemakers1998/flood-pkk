@@ -43,7 +43,7 @@ void loop() {
   int distance = random(2, 100);
 
   // ===== Sensor details kept in code =====
-  String sensorDetails = "IR Sensor Distance: " + String(distance) + " cm";
+  String sensorDetails = "IR Sensor Distance: " + " cm";
 
   // ===== Status =====
   String message = "Sensor in-progress... 🔄";
