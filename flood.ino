@@ -49,7 +49,6 @@ void loop() {
   String message = "Sensor in-progress... 🔄";
 
   Serial.println("Sending to Telegram: " + message);
-  Serial.println("Debug Sensor Values (Serial Only):");
   Serial.println(sensorDetails);
   Serial.println("------------------------------------------------");
 
