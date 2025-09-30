@@ -17,7 +17,7 @@ String chatID   = "YOUR_CHAT_ID";
 
 // ====== Sensor Pins ======
 const int irPin = 5;            // Example: GPIO5 for IR sensor (digital)
-const int soilPin = 34;         // Example: GPIO34 for Soil Moisture (analog, ESP32 ADC pin)
+const int waterPin = 34;        // Example: GPIO34 for Water Level Sensor (analog, ESP32 ADC pin)
 
 // ====== Function to send message to Telegram ======
 void sendToTelegram(String message) {
@@ -48,7 +48,7 @@ void setup() {
   Serial.println("\nWiFi connected!");
 
   // Send startup message
-  sendToTelegram("ESP Device is Online ✅ (Flood Detector with Sensors)");
+  sendToTelegram("ESP Device is Online ✅ (Flood Detector with IR Sensor & Water Level Sensor)");
 }
 
 void loop() {
@@ -56,22 +56,22 @@ void loop() {
   int irValue = digitalRead(irPin);
   String irStatus = (irValue == LOW) ? "Object Detected 🚨" : "No Object ✅";
 
-  // ===== Soil Moisture Sensor Reading =====
-  int soilValue = analogRead(soilPin);   // 0 (wet) → 4095 (dry)
-  String soilStatus;
-  if (soilValue < 1500) {
-    soilStatus = "Soil is Wet 💧 (Possible Flood Risk)";
-  } else if (soilValue < 3000) {
-    soilStatus = "Soil is Moist 🌱";
+  // ===== Water Level Sensor Reading =====
+  int waterValue = analogRead(waterPin);   // 0 (dry) → 4095 (fully immersed)
+  String waterStatus;
+  if (waterValue < 1000) {
+    waterStatus = "Water Level: Safe ✅";
+  } else if (waterValue < 2500) {
+    waterStatus = "Water Level: Medium ⚠️";
   } else {
-    soilStatus = "Soil is Dry ☀️";
+    waterStatus = "Water Level: HIGH 🚨 Flood Risk!";
   }
 
   // ===== Create Message =====
   String message = "🌊 Flood Detector Status:\n";
   message += "IR Sensor: " + irStatus + "\n";
-  message += "Soil Moisture: " + soilStatus + "\n";
-  message += "Raw Soil Value: " + String(soilValue);
+  message += waterStatus + "\n";
+  message += "Raw Water Value: " + String(waterValue);
 
   // ===== Send to Serial & Telegram =====
   Serial.println("Sending to Telegram:\n" + message);
